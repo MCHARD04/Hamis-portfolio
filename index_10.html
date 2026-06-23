@@ -567,20 +567,31 @@ hr.rule{border:none;border-top:1px solid var(--rule)}
 }
 .proj-grid{display:flex;flex-direction:column;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
 .proj-row{
-  display:grid;grid-template-columns:52px 2fr 1fr 1.2fr auto;
+  display:grid;grid-template-columns:104px 2fr 1fr 1.2fr auto;
   align-items:center;gap:0;
   background:var(--white);
-  padding:24px 32px;
+  padding:20px 32px;
   transition:background .2s;
   cursor:pointer;
 }
 .proj-row:hover{background:var(--off)}
 .proj-thumb{
-  width:44px;height:44px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;font-family:var(--f-mono);font-weight:700;font-size:.85rem;
-  margin-right:20px;flex-shrink:0;
+  width:84px;height:64px;border-radius:10px;
+  position:relative;overflow:hidden;flex-shrink:0;
+  margin-right:20px;
   box-shadow:0 8px 16px rgba(0,59,142,.18);
+}
+.proj-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.proj-thumb::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(160deg,rgba(0,59,142,.22),rgba(26,107,255,0) 60%);
+  pointer-events:none;
+}
+.proj-thumb-num{
+  position:absolute;bottom:4px;left:4px;z-index:1;
+  background:rgba(0,59,142,.85);color:#fff;
+  font-family:var(--f-mono);font-size:.55rem;font-weight:600;
+  padding:2px 6px;border-radius:4px;letter-spacing:.05em;
 }
 .proj-info h3{
   font-size:1rem;font-weight:700;letter-spacing:-.025em;margin-bottom:4px;
@@ -740,8 +751,8 @@ footer{
   #about{grid-template-columns:1fr;gap:48px}
   .contact-layout{grid-template-columns:1fr;gap:48px}
   .edu-grid{grid-template-columns:1fr}
-  .proj-row{grid-template-columns:44px 1fr auto;gap:0;padding:22px 20px}
-  .proj-thumb{margin-right:14px}
+  .proj-row{grid-template-columns:72px 1fr auto;gap:0;padding:18px 20px}
+  .proj-thumb{width:56px;height:48px;margin-right:14px}
   .proj-tags,.proj-type{display:none}
   .projects-intro{grid-template-columns:1fr}
   .skill-grid{grid-template-columns:1fr}
@@ -1119,7 +1130,10 @@ footer{
 
   <div class="proj-grid reveal">
     <div class="proj-row">
-      <div class="proj-thumb" style="background:linear-gradient(135deg,#003B8E,#1A6BFF)">01</div>
+      <div class="proj-thumb">
+        <img src="https://picsum.photos/seed/env-monitor-dit/240/180" alt="Smart Environmental Monitor preview" loading="lazy"/>
+        <span class="proj-thumb-num">01</span>
+      </div>
       <div class="proj-info">
         <h3>Smart Environmental Monitor</h3>
         <p>Arduino IoT system with real-time web dashboard, MQTT broker, and sensor fusion for air quality, temperature, and humidity.</p>
@@ -1136,7 +1150,10 @@ footer{
       </div>
     </div>
     <div class="proj-row">
-      <div class="proj-thumb" style="background:linear-gradient(135deg,#1A6BFF,#5FA0FF)">02</div>
+      <div class="proj-thumb">
+        <img src="https://picsum.photos/seed/tcpip-chat-dit/240/180" alt="TCP/IP Multi-Client Chat preview" loading="lazy"/>
+        <span class="proj-thumb-num">02</span>
+      </div>
       <div class="proj-info">
         <h3>TCP/IP Multi-Client Chat</h3>
         <p>Multithreaded Java chat server over TCP sockets with AES message encryption and a lightweight Swing client interface.</p>
@@ -1152,7 +1169,10 @@ footer{
       </div>
     </div>
     <div class="proj-row">
-      <div class="proj-thumb" style="background:linear-gradient(135deg,#0B2F6B,#2B5FCC)">03</div>
+      <div class="proj-thumb">
+        <img src="https://picsum.photos/seed/pid-robot-dit/240/180" alt="PID Line-Following Robot preview" loading="lazy"/>
+        <span class="proj-thumb-num">03</span>
+      </div>
       <div class="proj-info">
         <h3>PID Line-Following Robot</h3>
         <p>Self-navigating robot with IR sensor array, PID controller, custom PCB, and C firmware capable of navigating complex tracks.</p>
@@ -1168,7 +1188,10 @@ footer{
       </div>
     </div>
     <div class="proj-row">
-      <div class="proj-thumb" style="background:linear-gradient(135deg,#0047AB,#3D8BFF)">04</div>
+      <div class="proj-thumb">
+        <img src="https://picsum.photos/seed/library-system-dit/240/180" alt="Library Management System preview" loading="lazy"/>
+        <span class="proj-thumb-num">04</span>
+      </div>
       <div class="proj-info">
         <h3>Library Management System</h3>
         <p>Full-stack web application with role-based access control, lending workflows, and a REST API backed by PostgreSQL.</p>
@@ -1184,7 +1207,10 @@ footer{
       </div>
     </div>
     <div class="proj-row">
-      <div class="proj-thumb" style="background:linear-gradient(135deg,#002B66,#1A6BFF)">05</div>
+      <div class="proj-thumb">
+        <img src="https://picsum.photos/seed/fpga-alu-dit/240/180" alt="4-bit ALU in Verilog preview" loading="lazy"/>
+        <span class="proj-thumb-num">05</span>
+      </div>
       <div class="proj-info">
         <h3>4-bit ALU in Verilog</h3>
         <p>Synthesisable 4-bit Arithmetic Logic Unit designed in Verilog, tested on an FPGA with full testbench coverage and timing analysis.</p>
