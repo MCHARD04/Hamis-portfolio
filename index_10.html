@@ -238,8 +238,14 @@ hr.rule{border:none;border-top:1px solid var(--rule)}
   padding:calc(var(--nav-h) + 60px) 5vw 80px;
   gap:60px;
   border-bottom:1px solid var(--rule);
+  position:relative;overflow:hidden;
 }
-.hero-left{}
+#hero::before{
+  content:'';position:absolute;top:-10%;left:-8%;width:46%;height:70%;
+  background:radial-gradient(circle,rgba(26,107,255,.1),transparent 70%);
+  pointer-events:none;z-index:0;
+}
+.hero-left{position:relative;z-index:1}
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
   font-family:var(--f-mono);font-size:.68rem;
@@ -278,6 +284,7 @@ hr.rule{border:none;border-top:1px solid var(--rule)}
 .hero-right{
   display:flex;align-items:center;justify-content:center;
   animation:fadeUp .8s .5s both;
+  position:relative;z-index:1;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -327,14 +334,16 @@ hr.rule{border:none;border-top:1px solid var(--rule)}
 }
 /* Card itself */
 .id-card-3d{
-  width:300px;
+  width:min(300px,78vw);
   transform-style:preserve-3d;
   transition:transform .09s linear;
-  cursor:none;
   margin-top:-2px;
 }
+@media(min-width:701px){.id-card-3d{cursor:none}}
 .id-card-face{
-  width:300px;
+  width:100%;
+  aspect-ratio:300/388;
+  display:flex;flex-direction:column;
   border-radius:18px;
   background:#fff;
   box-shadow:
@@ -344,18 +353,30 @@ hr.rule{border:none;border-top:1px solid var(--rule)}
   overflow:hidden;
   position:relative;
 }
-/* Photo zone — occupies most of the card, calm neutral tones */
+/* Photo zone — occupies most of the card, vivid blue, colourful */
 .card-photo-zone{
-  height:280px;
-  padding:18px;
-  background:linear-gradient(160deg,#EEF0F4 0%,#E1E5EC 100%);
+  flex:1 1 auto;
+  padding:6%;
+  background:linear-gradient(150deg,#003B8E 0%,#1A6BFF 65%,#4A8AFF 100%);
   display:flex;align-items:center;justify-content:center;
-  position:relative;
+  position:relative;overflow:hidden;
+}
+.card-photo-zone::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.16) 1.5px,transparent 1.5px);
+  background-size:16px 16px;
+  opacity:.6;pointer-events:none;
+}
+.card-photo-zone::after{
+  content:'';position:absolute;top:-40%;right:-30%;width:80%;height:80%;
+  background:radial-gradient(circle,rgba(255,255,255,.18),transparent 70%);
+  pointer-events:none;
 }
 .card-photo-wrap{
   width:100%;height:100%;border-radius:14px;
-  overflow:hidden;position:relative;
-  background:linear-gradient(165deg,#D7DCE5 0%,#C5CCD9 100%);
+  overflow:hidden;position:relative;z-index:1;
+  background:rgba(255,255,255,.14);
+  border:1.5px solid rgba(255,255,255,.4);
   display:flex;align-items:flex-end;justify-content:center;
 }
 .card-photo-wrap svg{
@@ -364,21 +385,31 @@ hr.rule{border:none;border-top:1px solid var(--rule)}
 .card-photo-placeholder{
   position:absolute;bottom:10px;
   font-family:var(--f-mono);font-size:.55rem;
-  color:rgba(255,255,255,.85);letter-spacing:.1em;text-align:center;
+  color:rgba(255,255,255,.9);letter-spacing:.1em;text-align:center;
   width:100%;
 }
 /* Bottom white section — name + role only */
 .card-bottom{
-  padding:24px 20px 26px;
+  flex:0 0 auto;
+  padding:7% 8% 8%;
   text-align:center;
+  position:relative;
+}
+.card-bottom::before{
+  content:'';position:absolute;top:0;left:14%;right:14%;height:3px;
+  background:linear-gradient(90deg,#F0C843,var(--blue-vivid));
+  border-radius:0 0 3px 3px;
 }
 .card-holder-name{
-  font-size:1.15rem;font-weight:800;letter-spacing:-.03em;
-  color:var(--ink);line-height:1.2;margin-bottom:6px;
+  font-size:1.1rem;font-weight:800;letter-spacing:-.03em;
+  color:var(--ink);line-height:1.2;margin-bottom:8px;
 }
 .card-role-text{
-  font-size:.72rem;color:var(--ink-50);font-weight:500;
-  font-family:var(--f-mono);letter-spacing:.08em;text-transform:uppercase;
+  display:inline-flex;align-items:center;
+  padding:4px 13px;border-radius:20px;
+  background:var(--blue-pale);color:var(--blue);
+  font-size:.65rem;font-weight:600;
+  font-family:var(--f-mono);letter-spacing:.07em;text-transform:uppercase;
 }
 
 /* Card holder (dark frame) */
@@ -437,6 +468,25 @@ hr.rule{border:none;border-top:1px solid var(--rule)}
   border-bottom:1px solid var(--rule);
 }
 .about-left{}
+.about-photo{margin-bottom:32px}
+.about-photo-frame{
+  width:128px;height:128px;border-radius:22px;
+  background:linear-gradient(150deg,#003B8E 0%,#1A6BFF 65%,#4A8AFF 100%);
+  display:flex;align-items:flex-end;justify-content:center;
+  position:relative;overflow:hidden;
+  box-shadow:0 18px 36px rgba(26,107,255,.28);
+}
+.about-photo-frame::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.16) 1.5px,transparent 1.5px);
+  background-size:14px 14px;opacity:.6;pointer-events:none;
+}
+.about-photo-frame svg{width:58%;position:absolute;bottom:0}
+.about-photo-placeholder{
+  position:absolute;bottom:8px;width:100%;text-align:center;
+  font-family:var(--f-mono);font-size:.48rem;letter-spacing:.08em;
+  color:rgba(255,255,255,.9);
+}
 .about-stat-row{
   display:flex;gap:40px;margin-top:40px;padding-top:40px;
   border-top:1px solid var(--rule);
@@ -517,17 +567,20 @@ hr.rule{border:none;border-top:1px solid var(--rule)}
 }
 .proj-grid{display:flex;flex-direction:column;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:12px;overflow:hidden}
 .proj-row{
-  display:grid;grid-template-columns:40px 2fr 1fr 1.2fr auto;
+  display:grid;grid-template-columns:52px 2fr 1fr 1.2fr auto;
   align-items:center;gap:0;
   background:var(--white);
-  padding:28px 32px;
+  padding:24px 32px;
   transition:background .2s;
   cursor:pointer;
 }
 .proj-row:hover{background:var(--off)}
-.proj-num{
-  font-family:var(--f-mono);font-size:.65rem;color:var(--ink-50);
-  padding-right:20px;
+.proj-thumb{
+  width:44px;height:44px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-family:var(--f-mono);font-weight:700;font-size:.85rem;
+  margin-right:20px;flex-shrink:0;
+  box-shadow:0 8px 16px rgba(0,59,142,.18);
 }
 .proj-info h3{
   font-size:1rem;font-weight:700;letter-spacing:-.025em;margin-bottom:4px;
@@ -679,15 +732,16 @@ footer{
    RESPONSIVE
 ═══════════════════════════════════════════════════════ */
 @media(max-width:1100px){
-  #hero{grid-template-columns:1fr;padding-top:calc(var(--nav-h)+40px)}
-  .hero-right{display:none}
+  #hero{grid-template-columns:1fr;padding-top:calc(var(--nav-h)+40px);min-height:auto}
+  .hero-right{margin-top:56px}
   .skill-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:860px){
   #about{grid-template-columns:1fr;gap:48px}
   .contact-layout{grid-template-columns:1fr;gap:48px}
   .edu-grid{grid-template-columns:1fr}
-  .proj-row{grid-template-columns:32px 1fr auto;gap:0;padding:22px 20px}
+  .proj-row{grid-template-columns:44px 1fr auto;gap:0;padding:22px 20px}
+  .proj-thumb{margin-right:14px}
   .proj-tags,.proj-type{display:none}
   .projects-intro{grid-template-columns:1fr}
   .skill-grid{grid-template-columns:1fr}
@@ -874,6 +928,16 @@ footer{
 <!-- ════════════════════ ABOUT ════════════════════ -->
 <section id="about">
   <div class="about-left reveal">
+    <div class="about-photo">
+      <div class="about-photo-frame">
+        <svg viewBox="0 0 80 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="40" cy="30" rx="18" ry="20" fill="rgba(255,255,255,0.3)"/>
+          <path d="M10 85 C10 60 70 60 70 85" fill="rgba(255,255,255,0.25)"/>
+          <ellipse cx="40" cy="30" rx="14" ry="16" fill="rgba(255,255,255,0.4)"/>
+        </svg>
+        <div class="about-photo-placeholder">ADD PHOTO</div>
+      </div>
+    </div>
     <div class="label-tag">About</div>
     <h2 class="section-hed">Engineering solutions from hardware to cloud.</h2>
     <div class="about-stat-row">
@@ -1055,7 +1119,7 @@ footer{
 
   <div class="proj-grid reveal">
     <div class="proj-row">
-      <span class="proj-num">01</span>
+      <div class="proj-thumb" style="background:linear-gradient(135deg,#003B8E,#1A6BFF)">01</div>
       <div class="proj-info">
         <h3>Smart Environmental Monitor</h3>
         <p>Arduino IoT system with real-time web dashboard, MQTT broker, and sensor fusion for air quality, temperature, and humidity.</p>
@@ -1072,7 +1136,7 @@ footer{
       </div>
     </div>
     <div class="proj-row">
-      <span class="proj-num">02</span>
+      <div class="proj-thumb" style="background:linear-gradient(135deg,#1A6BFF,#5FA0FF)">02</div>
       <div class="proj-info">
         <h3>TCP/IP Multi-Client Chat</h3>
         <p>Multithreaded Java chat server over TCP sockets with AES message encryption and a lightweight Swing client interface.</p>
@@ -1088,7 +1152,7 @@ footer{
       </div>
     </div>
     <div class="proj-row">
-      <span class="proj-num">03</span>
+      <div class="proj-thumb" style="background:linear-gradient(135deg,#0B2F6B,#2B5FCC)">03</div>
       <div class="proj-info">
         <h3>PID Line-Following Robot</h3>
         <p>Self-navigating robot with IR sensor array, PID controller, custom PCB, and C firmware capable of navigating complex tracks.</p>
@@ -1104,7 +1168,7 @@ footer{
       </div>
     </div>
     <div class="proj-row">
-      <span class="proj-num">04</span>
+      <div class="proj-thumb" style="background:linear-gradient(135deg,#0047AB,#3D8BFF)">04</div>
       <div class="proj-info">
         <h3>Library Management System</h3>
         <p>Full-stack web application with role-based access control, lending workflows, and a REST API backed by PostgreSQL.</p>
@@ -1120,7 +1184,7 @@ footer{
       </div>
     </div>
     <div class="proj-row">
-      <span class="proj-num">05</span>
+      <div class="proj-thumb" style="background:linear-gradient(135deg,#002B66,#1A6BFF)">05</div>
       <div class="proj-info">
         <h3>4-bit ALU in Verilog</h3>
         <p>Synthesisable 4-bit Arithmetic Logic Unit designed in Verilog, tested on an FPGA with full testbench coverage and timing analysis.</p>
